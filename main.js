@@ -1,6 +1,7 @@
 setInterval(setSemester, 1000);
 setInterval(setYear, 1000);
 setInterval(setGrad, 1000);
+setInterval(setTime, 1000);
 
 function setSemester(){
 	var start = new Date(2017, 0, 17, 8);
@@ -33,4 +34,9 @@ function setGrad(){
 	var perc = num/diff*100;
 	document.getElementById("all").style.width = perc + "%";
 	document.getElementById("label3").innerHTML = Math.round(perc*100)/100 + "%";
+}
+
+function setTime(){
+	var now = Date(Date.now())
+	document.getElementById("time").innerHTML = now + "";
 }
