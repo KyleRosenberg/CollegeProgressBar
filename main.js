@@ -4,7 +4,7 @@ setInterval(setGrad, 1000);
 
 function setSemester(){
 	var start = new Date(2017, 0, 17, 8);
-	var end = new Date(2017, 5, 12, 18);
+	var end = new Date(2017, 4, 12, 18);
 	var diff = (end.getTime() - start.getTime())/1000;
 	var now = Date.now();
 	var num = (now - start.getTime())/1000;
@@ -15,7 +15,7 @@ function setSemester(){
 
 function setYear(){
 	var start = new Date(2016, 7, 22, 8);
-	var end = new Date(2017, 5, 12, 18);
+	var end = new Date(2017, 4, 12, 18);
 	var diff = (end.getTime() - start.getTime())/1000;
 	var now = Date.now();
 	var num = (now - start.getTime())/1000;
@@ -25,8 +25,9 @@ function setYear(){
 }
 
 function setGrad(){
-	var start = new Date(2017, 0, 17, 8);
-	var end = new Date(2020, 5, 19, 18);
+	var start = new Date(2016, 7, 22, 8);
+	var end = new Date(2020, 4, 19, 18);
+	console.log(end);
 	var diff = (end.getTime() - start.getTime())/1000;
 	var now = Date.now();
 	var num = (now - start.getTime())/1000;
