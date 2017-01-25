@@ -9,7 +9,7 @@ function setSemester(){
 	var now = Date.now();
 	var num = (now - start.getTime())/1000;
 	var perc = num/diff*100;
-	document.getElementById("myBar").style.width = perc + "%";
+	document.getElementById("currsem").style.width = perc + "%";
 	document.getElementById("label").innerHTML = Math.round(perc*100)/100 + "%";
 }
 
@@ -20,7 +20,7 @@ function setYear(){
 	var now = Date.now();
 	var num = (now - start.getTime())/1000;
 	var perc = num/diff*100;
-	document.getElementById("myBar2").style.width = perc + "%";
+	document.getElementById("curryer").style.width = perc + "%";
 	document.getElementById("label2").innerHTML = Math.round(perc*100)/100 + "%";
 }
 
@@ -31,6 +31,6 @@ function setGrad(){
 	var now = Date.now();
 	var num = (now - start.getTime())/1000;
 	var perc = num/diff*100;
-	document.getElementById("myBar3").style.width = perc + "%";
+	document.getElementById("all").style.width = perc + "%";
 	document.getElementById("label3").innerHTML = Math.round(perc*100)/100 + "%";
 }
