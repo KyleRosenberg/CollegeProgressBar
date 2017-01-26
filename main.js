@@ -13,8 +13,8 @@ setInterval(setWend, 1000);
 
 function setWend(){
 	var now = Date.now();
-	var start = getLastDay(new Date(now), 0);
-	var end = getNextDay(new Date(now), 5, 19);
+	var start = getLastDay(new Date(now), 1, 8);
+	var end = getNextDay(new Date(now), 5, 18);
 	var diff = (end.getTime()-start.getTime())/1000;
 	var num = (now-start.getTime())/1000;
 	var perc = Math.min(100, num/diff*100);
@@ -24,7 +24,7 @@ function setWend(){
 
 function setMeals(){
 	var now = Date.now();
-	var start = getLastDay(new Date(now), 4);
+	var start = getLastDay(new Date(now), 4, 0);
 	var end = getNextDay(new Date(now), 3, 19);
 	var diff = (end.getTime()-start.getTime())/1000;
 	var num = (now-start.getTime())/1000;
@@ -33,11 +33,11 @@ function setMeals(){
 	document.getElementById("label4").innerHTML = Math.round(perc*100)/100 + "%";
 }
 
-function getLastDay(now, day){
+function getLastDay(now, day, time){
 	while (now.getDay()!=day){
 		now.setDate(now.getDate()-1);
 	}
-	now.setHours(0);
+	now.setHours(time);
 	now.setMinutes(0);
 	now.setSeconds(0);
 	return now;
