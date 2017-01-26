@@ -3,16 +3,29 @@ setSemester();
 setYear();
 setGrad();
 setTime();
+setWend();
 setInterval(setMeals, 1000);
 setInterval(setSemester, 1000);
 setInterval(setYear, 1000);
 setInterval(setGrad, 1000);
 setInterval(setTime, 1000);
+setInterval(setWend, 1000);
+
+function setWend(){
+	var now = Date.now();
+	var start = getLastDay(new Date(now), 0);
+	var end = getNextDay(new Date(now), 5, 19);
+	var diff = (end.getTime()-start.getTime())/1000;
+	var num = (now-start.getTime())/1000;
+	var perc = Math.min(100, num/diff*100);
+	document.getElementById("wend").style.width = perc + "%";
+	document.getElementById("label5").innerHTML = Math.round(perc*100)/100 + "%";
+}
 
 function setMeals(){
 	var now = Date.now();
-	var start = getLastWednesday(new Date(now));
-	var end = getNextWednesday(new Date(now));
+	var start = getLastDay(new Date(now), 4);
+	var end = getNextDay(new Date(now), 3, 19);
 	var diff = (end.getTime()-start.getTime())/1000;
 	var num = (now-start.getTime())/1000;
 	var perc = Math.min(100, num/diff*100);
@@ -20,8 +33,8 @@ function setMeals(){
 	document.getElementById("label4").innerHTML = Math.round(perc*100)/100 + "%";
 }
 
-function getLastWednesday(now){
-	while (now.getDay()!=4){
+function getLastDay(now, day){
+	while (now.getDay()!=day){
 		now.setDate(now.getDate()-1);
 	}
 	now.setHours(0);
@@ -30,11 +43,11 @@ function getLastWednesday(now){
 	return now;
 }
 
-function getNextWednesday(now){
-	while (now.getDay()!=3){
+function getNextDay(now, day, time){
+	while (now.getDay()!=day){
 		now.setDate(now.getDate()+1);
 	}
-	now.setHours(19);
+	now.setHours(time);
 	now.setMinutes(0);
 	now.setSeconds(0);
 	return now;
