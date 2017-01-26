@@ -24,6 +24,9 @@
 #all {
     background-color: red;
 }
+#meals{
+	background-color: orange;
+}
 body{
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	color:white;
