@@ -1,36 +1,68 @@
-setMeals();
-setSemester();
-setYear();
-setGrad();
+var meals = setInterval(function(){loadValues(getLastDay(new Date(), 4, 0), getNextDay(new Date(), 3, 19), "meals", "label4")}, 15);
+var currsem = setInterval(function(){loadValues(new Date(2017, 0, 17, 8), new Date(2017, 4, 12, 18), "currsem", "label")}, 15);
+var curryer = setInterval(function(){loadValues(new Date(2016, 7, 22, 8), new Date(2017, 4, 12, 18), "curryer", "label2")}, 15);
+var all = setInterval(function(){loadValues(new Date(2016, 7, 22, 8), new Date(2020, 4, 19, 18), "all", "label3")}, 15);
+var wend = setInterval(function(){loadValues(getLastDay(new Date(), 1, 8), getNextDay(new Date(), 5, 18), "wend", "label5")}, 15);
 setTime();
-setWend();
-setInterval(setMeals, 1000);
-setInterval(setSemester, 1000);
-setInterval(setYear, 1000);
-setInterval(setGrad, 1000);
 setInterval(setTime, 1000);
-setInterval(setWend, 1000);
 
-function setWend(){
-	var now = Date.now();
-	var start = getLastDay(new Date(now), 1, 8);
-	var end = getNextDay(new Date(now), 5, 18);
-	var diff = (end.getTime()-start.getTime())/1000;
-	var num = (now-start.getTime())/1000;
-	var perc = Math.min(100, num/diff*100);
-	document.getElementById("wend").style.width = perc + "%";
-	document.getElementById("label5").innerHTML = Math.round(perc*100)/100 + "%";
+var intervals = {
+	"meals": meals,
+	"currsem": currsem,
+	"curryer": curryer,
+	"all": all,
+	"wend": wend
 }
 
-function setMeals(){
+var functs = {
+	"meals": melloop,
+	"currsem": semloop,
+	"curryer": yerloop,
+	"all": allloop,
+	"wend": wenloop
+}
+
+function melloop(){setValues(getLastDay(new Date(), 4, 0), getNextDay(new Date(), 3, 19), "meals", "label4")}
+function semloop(){setValues(new Date(2017, 0, 17, 8), new Date(2017, 4, 12, 18), "currsem", "label")}
+function yerloop(){setValues(new Date(2016, 7, 22, 8), new Date(2017, 4, 12, 18), "curryer", "label2")}
+function allloop(){setValues(new Date(2016, 7, 22, 8), new Date(2020, 4, 19, 18), "all", "label3")}
+function wenloop(){setValues(getLastDay(new Date(), 1, 8), getNextDay(new Date(), 5, 18), "wend", "label5")}
+
+function setValues(start, end, id, lb){
 	var now = Date.now();
-	var start = getLastDay(new Date(now), 4, 0);
-	var end = getNextDay(new Date(now), 3, 19);
 	var diff = (end.getTime()-start.getTime())/1000;
 	var num = (now-start.getTime())/1000;
 	var perc = Math.min(100, num/diff*100);
-	document.getElementById("meals").style.width = perc + "%";
-	document.getElementById("label4").innerHTML = Math.round(perc*100)/100 + "%";
+	document.getElementById(id).style.width = perc + "%";
+	document.getElementById(lb).innerHTML = Math.round(perc*100)/100 + "%";
+}
+
+function loadValues(start, end, id, lb){
+	var now = Date.now();
+	var bar = document.getElementById(id);
+	var wid = percentwidth(bar);
+	var diff = (end.getTime()-start.getTime())/1000;
+	var num = (now-start.getTime())/1000;
+	var perc = Math.min(100, num/diff*100);
+	if (wid==false){
+		wid = perc/60;
+	}else{
+		wid += (perc/60.0);
+	}
+	if (wid >= perc){
+		wid = perc;
+		clearInterval(intervals[id]);
+		setInterval(functs[id], 1000);	
+	}
+	bar.style.width = wid + "%";
+	document.getElementById(lb).innerHTML = Math.round(wid*100)/100 + "%";
+}
+
+function percentwidth(elem){
+    var wid = elem.style.width;
+    if (wid.length==0) return 0;
+    var realwid = parseFloat(wid.substr(0, wid.length-1));
+    return realwid;
 }
 
 function getLastDay(now, day, time){
@@ -51,41 +83,6 @@ function getNextDay(now, day, time){
 	now.setMinutes(0);
 	now.setSeconds(0);
 	return now;
-}
-
-function setSemester(){
-	var start = new Date(2017, 0, 17, 8);
-	//console.log(start);
-	var end = new Date(2017, 4, 12, 18);
-	//console.log(end);
-	var diff = (end.getTime() - start.getTime())/1000;
-	var now = Date.now();
-	var num = (now - start.getTime())/1000;
-	var perc = num/diff*100;
-	document.getElementById("currsem").style.width = perc + "%";
-	document.getElementById("label").innerHTML = Math.round(perc*100)/100 + "%";
-}
-
-function setYear(){
-	var start = new Date(2016, 7, 22, 8);
-	var end = new Date(2017, 4, 12, 18);
-	var diff = (end.getTime() - start.getTime())/1000;
-	var now = Date.now();
-	var num = (now - start.getTime())/1000;
-	var perc = num/diff*100;
-	document.getElementById("curryer").style.width = perc + "%";
-	document.getElementById("label2").innerHTML = Math.round(perc*100)/100 + "%";
-}
-
-function setGrad(){
-	var start = new Date(2016, 7, 22, 8);
-	var end = new Date(2020, 4, 19, 18);
-	var diff = (end.getTime() - start.getTime())/1000;
-	var now = Date.now();
-	var num = (now - start.getTime())/1000;
-	var perc = num/diff*100;
-	document.getElementById("all").style.width = perc + "%";
-	document.getElementById("label3").innerHTML = Math.round(perc*100)/100 + "%";
 }
 
 function setTime(){
