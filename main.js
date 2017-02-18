@@ -76,9 +76,17 @@ function getLastDay(now, day, time){
 }
 
 function getNextDay(now, day, time){
-	while (now.getDay()!=day){
-		now.setDate(now.getDate()+1);
-	}
+	if (day == 5){
+		if (now.getDay() == 0 || now.getDay() == 6){
+			while (now.getDay()!=day){
+				now.setDate(now.getDate()-1);
+			}
+		} else {
+			while (now.getDay()!=day){
+				now.setDate(now.getDate()+1);
+			}
+		}
+	} 
 	now.setHours(time);
 	now.setMinutes(0);
 	now.setSeconds(0);
