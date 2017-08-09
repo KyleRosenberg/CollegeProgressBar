@@ -1,13 +1,11 @@
-var meals = setInterval(function(){loadValues(getLastDay(new Date(), 4, 0), getNextDay(new Date(), 3, 19), "meals", "label4")}, 15);
-var currsem = setInterval(function(){loadValues(new Date(2017, 0, 17, 8), new Date(2017, 4, 12, 18), "currsem", "label")}, 15);
-var curryer = setInterval(function(){loadValues(new Date(2016, 7, 22, 8), new Date(2017, 4, 12, 18), "curryer", "label2")}, 15);
+var currsem = setInterval(function(){loadValues(new Date(2017, 7, 28, 8), new Date(2017, 11, 20, 18), "currsem", "label")}, 15);
+var curryer = setInterval(function(){loadValues(new Date(2017, 7, 28, 8), new Date(2018, 4, 9, 18), "curryer", "label2")}, 15);
 var all = setInterval(function(){loadValues(new Date(2016, 7, 22, 8), new Date(2020, 4, 19, 18), "all", "label3")}, 15);
 var wend = setInterval(function(){loadValues(getLastDay(new Date(), 1, 8), getNextDay(new Date(), 5, 18), "wend", "label5")}, 15);
 setTime();
 setInterval(setTime, 1000);
 
 var intervals = {
-	"meals": meals,
 	"currsem": currsem,
 	"curryer": curryer,
 	"all": all,
@@ -15,24 +13,22 @@ var intervals = {
 }
 
 var functs = {
-	"meals": melloop,
 	"currsem": semloop,
 	"curryer": yerloop,
 	"all": allloop,
 	"wend": wenloop
 }
 
-function melloop(){setValues(getLastDay(new Date(), 4, 0), getNextDay(new Date(), 3, 19), "meals", "label4")}
-function semloop(){setValues(new Date(2017, 0, 17, 8), new Date(2017, 4, 12, 18), "currsem", "label")}
-function yerloop(){setValues(new Date(2016, 7, 22, 8), new Date(2017, 4, 12, 18), "curryer", "label2")}
+function semloop(){setValues(new Date(2017, 7, 28, 8), new Date(2017, 11, 20, 18), "currsem", "label")}
+function yerloop(){setValues(new Date(2017, 7, 28, 8), new Date(2018, 4, 9, 18), "curryer", "label2")}
 function allloop(){setValues(new Date(2016, 7, 22, 8), new Date(2020, 4, 19, 18), "all", "label3")}
 function wenloop(){setValues(getLastDay(new Date(), 1, 8), getNextDay(new Date(), 5, 18), "wend", "label5")}
 
 function setValues(start, end, id, lb){
 	var now = Date.now();
-	var diff = (end.getTime()-start.getTime())/1000;
-	var num = (now-start.getTime())/1000;
-	var perc = Math.min(100, num/diff*100);
+	var diff = (end.getTime()-start.getTime());
+	var num = (now-start.getTime());
+	var perc = Math.max(0, Math.min(100, num/diff*100));
 	document.getElementById(id).style.width = perc + "%";
 	document.getElementById(lb).innerHTML = Math.round(perc*100)/100 + "%";
 }
@@ -43,7 +39,7 @@ function loadValues(start, end, id, lb){
 	var wid = percentwidth(bar);
 	var diff = (end.getTime()-start.getTime())/1000;
 	var num = (now-start.getTime())/1000;
-	var perc = Math.min(100, num/diff*100);
+	var perc = Math.max(0, Math.min(100, num/diff*100));
 	if (wid==false){
 		wid = perc/60;
 	}else{
@@ -52,7 +48,7 @@ function loadValues(start, end, id, lb){
 	if (wid >= perc){
 		wid = perc;
 		clearInterval(intervals[id]);
-		setInterval(functs[id], 1000);	
+		setInterval(functs[id], 1000);
 	}
 	bar.style.width = wid + "%";
 	document.getElementById(lb).innerHTML = Math.round(wid*100)/100 + "%";
@@ -86,7 +82,7 @@ function getNextDay(now, day, time){
 				now.setDate(now.getDate()+1);
 			}
 		}
-	} 
+	}
 	now.setHours(time);
 	now.setMinutes(0);
 	now.setSeconds(0);
