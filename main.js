@@ -26,7 +26,7 @@ function semloop(){setValues(new Date(2017, 7, 28, 8), new Date(2017, 11, 20, 18
 function yerloop(){setValues(new Date(2017, 7, 28, 8), new Date(2018, 4, 9, 18), "curryer", "label2")}
 function allloop(){setValues(new Date(2016, 7, 22, 8), new Date(2020, 4, 19, 18), "all", "label3")}
 function wenloop(){setValues(getLastDay(new Date(), 1, 8), getNextDay(new Date(), 5, 18), "wend", "label5")}
-function aptloop(){setValues(new Date(2017, 7, 6, 12), new Date(2018, 7, 2, 12), "apt", "label4")}
+function aptloop(){setValues(new Date(2017, 7, 6, 12), new Date(2017, 11, 24, 12), "apt", "label4")}
 
 function setValues(start, end, id, lb){
 	var now = Date.now();
