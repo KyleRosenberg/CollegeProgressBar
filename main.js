@@ -1,7 +1,7 @@
 var currsem = setInterval(function(){loadValues(new Date(2017, 7, 28, 8), new Date(2017, 11, 20, 18), "currsem", "label")}, 15);
 var curryer = setInterval(function(){loadValues(new Date(2017, 7, 28, 8), new Date(2018, 4, 9, 18), "curryer", "label2")}, 15);
 var all = setInterval(function(){loadValues(new Date(2016, 7, 22, 8), new Date(2020, 4, 19, 18), "all", "label3")}, 15);
-var apt = setInterval(function(){loadValues(new Date(2017, 7, 6, 12), new Date(2018, 11, 24, 12), "apt", "label4")}, 15);
+var apt = setInterval(function(){loadValues(new Date(2017, 7, 6, 12), new Date(2017, 11, 24, 12), "apt", "label4")}, 15);
 var wend = setInterval(function(){loadValues(getLastDay(new Date(), 1, 8), getNextDay(new Date(), 5, 18), "wend", "label5")}, 15);
 setTime();
 setInterval(setTime, 1000);
